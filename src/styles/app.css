@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #00456C; 
+  --accent-color: #FF7F50; 
+  --background-light: #f5f5f5; 
+  --text-color: #4A4A4A; 
+  --border-color: #dcdcdc; 
+  --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --hover-transform: translateY(-5px);
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-light);
+}
+
+h1, h2, h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: var(--primary-color);
+}

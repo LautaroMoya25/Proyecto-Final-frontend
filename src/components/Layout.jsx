@@ -1,16 +1,17 @@
-import  Footer  from "./Footer"
-import  Header  from "./Header"
+import React from "react";
+import Header from "./Header";
+import Footer from "./Footer";
 
-const Layout = (props) => {
+const Layout = ({ children }) => {
   return (
-    <div className={props.background}>
+    <div className="bg-gray-800 text-white min-h-screen pt-16 flex flex-col">
       <Header />
-      <main>
-        {props.children}
+      <main className="flex-grow container mx-auto p-4">
+        {children}
       </main>
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Layout 
+export default Layout;

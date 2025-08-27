@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import UserContext from './UserContext';
-import { AUTH_STATUS, ERROR_MESSAGES } from '../constants';
+import { AUTH_STATUS, ERROR_MESSAGES, API_ENDPOINTS } from '../constants';
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -9,7 +9,7 @@ export const UserProvider = ({ children }) => {
   const register = async (userData) => {
     try {
       setStatus(AUTH_STATUS.LOADING);
-      const response = await fetch('https://fakestoreapi.com/users', {
+      const response = await fetch(API_ENDPOINTS.USERS, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -17,7 +17,9 @@ export const UserProvider = ({ children }) => {
         body: JSON.stringify(userData)
       });
       
-      if (!response.ok) throw new Error(ERROR_MESSAGES.REGISTRATION_FAILED);
+      if (!response.ok) {
+        throw new Error(ERROR_MESSAGES.REGISTRATION_FAILED);
+      }
       
       const data = await response.json();
       setUser(data);
@@ -32,7 +34,7 @@ export const UserProvider = ({ children }) => {
   const login = async (username, password) => {
     try {
       setStatus(AUTH_STATUS.LOADING);
-      const response = await fetch('https://fakestoreapi.com/auth/login', {
+      const response = await fetch(API_ENDPOINTS.LOGIN, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -40,7 +42,9 @@ export const UserProvider = ({ children }) => {
         body: JSON.stringify({ username, password })
       });
       
-      if (!response.ok) throw new Error(ERROR_MESSAGES.LOGIN_FAILED);
+      if (!response.ok) {
+        throw new Error(ERROR_MESSAGES.LOGIN_FAILED);
+      }
       
       const data = await response.json();
       if (data.token) {
@@ -61,14 +65,16 @@ export const UserProvider = ({ children }) => {
     setStatus(AUTH_STATUS.LOGGED_OUT);
   };
 
+  const value = {
+    user,
+    status,
+    register,
+    login,
+    logout
+  };
+
   return (
-    <UserContext.Provider value={{
-      user,
-      status,
-      register,
-      login,
-      logout
-    }}>
+    <UserContext.Provider value={value}>
       {children}
     </UserContext.Provider>
   );
