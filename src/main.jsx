@@ -1,15 +1,14 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { RouterApp } from './router/RouterApp'
-import './styles/responsive.css'
-import "./index.css"
-import { UserProvider } from './context/UserContext'
+// src/main.jsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import UserProvider from './context/UserProvider';
+import './styles/responsive.css';
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
     <UserProvider>
-      <RouterApp />
+      <App />
     </UserProvider>
-  </StrictMode>,
-)
-
+  </React.StrictMode>,
+);
