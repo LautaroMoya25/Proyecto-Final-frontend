@@ -1,40 +1,78 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useState } from "react";
+import { AUTH_STATUS, ERROR_MESSAGES } from "../constants";
 
-const UserContext = createContext()
+export const UserContext = createContext();
 
-const UserProvider = (props) => {
-  const [user, setUser] = useState(null)
+export const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [status, setStatus] = useState(AUTH_STATUS.LOGGED_OUT);
 
-  const login = async (username, password) => {
-    // realizar una petición al backend 
-    const response = await fetch("https://fakestoreapi.com/auth/login", {
+  const register = async (userData) => {
+  try {
+    setStatus (AUTH_STATUS.LOADING);
+    const response = await fetch('https://fakestoreapi.com/users', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ username, password })
-    })
+      body: JSON.stringify(userData)
+    });
 
-    if (response.ok) {
-      const token = await response.json()
-      setUser(true)
-      return token
-    } else {
-      return false
+    if (!response.ok) throw new Error(ERROR_MESSAGES.REGISTRATION_FAILED);
+
+    const data = await response.json();
+    setUser(data);
+    setStatus(AUTH_STATUS.LOGGED_IN);
+    return { success: true, data };
+    } catch (error) {
+      setStatus(AUTH_STATUS.LOGGED_OUT);
+      return { success: false, error: error.message };
     }
-  }
+  };
 
+   const login = async (username, password) => {
+    try {
+      setStatus(AUTH_STATUS.LOADING);
+      const response = await fetch("https://fakestoreapi.com/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, password })
+      });
+
+      if (!response.ok) throw new Error(ERROR_MESSAGES.LOGIN_FAILED);
+
+      const data = await response.json();
+      setUser(data);
+      setStatus(AUTH_STATUS.LOGGED_IN);
+      return { success: true, data };
+    } catch (error) {
+      setStatus(AUTH_STATUS.LOGGED_OUT);
+      return { success: false, error: error.message };
+    }
+  };
   const logout = () => {
-    setUser(null)
-  }
+    setUser(null);
+    setStatus(AUTH_STATUS.LOGGED_OUT);
+  };
 
   return (
-    <UserContext.Provider value={{ login, logout, user }}>
-      {props.children}
+    <UserContext.Provider value={{
+    user,
+      status,
+      register,
+      login,
+      logout
+    }}>
+      {children}
     </UserContext.Provider>
-  )
-}
-
-const useAuth = () => useContext(UserContext)
-
-export { UserProvider, useAuth }
+  );
+};
+export const useUser = () => {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error('useUser must be used within a UserProvider');
+  }
+  return context;
+};
