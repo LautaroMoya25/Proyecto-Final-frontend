@@ -8,9 +8,9 @@ import { PrivateRoute } from "../components/PrivateRoute"
 import { AboutUs } from "../pages/AboutUs" 
 import ProductGrid from "../components/ProductGrid"
 import ValidatedForm from "../components/ValidatedForm"
- 
+
 const RouterApp = () => {
- const products = [
+    const products = [
     { id: 1, name: 'Camisa', price: 25.99, image: '/placeholder.jpg' },
     { id: 2, name: 'Campera', price: 49.99, image: '/placeholder.jpg' },
     { id: 3, name: 'Pantalón', price: 35.99, image: '/placeholder.jpg' },
@@ -23,6 +23,7 @@ const RouterApp = () => {
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         <Route path="/login" element={<Login />} />
         <Route path="/registrate" element={<Register />} />
+        <Route path="/productos" element={<ProductGrid products={products} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

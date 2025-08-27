@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import UserContext from './UserContext';
 import { AUTH_STATUS, ERROR_MESSAGES } from '../constants';
 
-const UserProvider = ({ children }) => {
+export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [status, setStatus] = useState(AUTH_STATUS.LOGGED_OUT);
 

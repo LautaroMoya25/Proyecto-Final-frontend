@@ -19,10 +19,8 @@ export const API_ENDPOINTS = {
 
 export const ERROR_MESSAGES = {
   LOGIN_FAILED: 'Error al iniciar sesión. Verifica tus credenciales.',
-  REGISTRATION_FAILED: 'Error al registrarse. Intenta nuevamente.',
   NETWORK_ERROR: 'Error de conexión. Intenta nuevamente.',
   INVALID_CREDENTIALS: 'Credenciales inválidas.',
-  REGISTRATION_FAILED: 'Error en el registro.'
 };
 
 export const VALIDATION_RULES = {

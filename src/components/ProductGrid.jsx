@@ -1,16 +1,13 @@
-import React, { useState } from 'react'
-import './styles/responsive.css';
+import React, { useState } from 'react';
+import "../styles/responsive.css";
 
 const ProductGrid = ({ products }) => {
-     const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredProducts = products.filter(product =>
+    const filteredProducts = products.filter(product =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-  };
   
-  export default ProductGrid;
-
   return (
     <div className="product-container">
       <div className="search-container">
@@ -25,14 +22,19 @@ const ProductGrid = ({ products }) => {
           <p className="no-results">No products found matching "{searchTerm}"</p>
         )}
       </div>
+
       <div className="product-grid">
         {filteredProducts.map((product) => (
           <div key={product.id} className="product-card">
             <img src={product.image} alt={product.name} />
             <h3>{product.name}</h3>
-            <p>{product.price}</p>
+            <p>${product.price}</p>
+            <button>añadir al carrito</button>
           </div>
         ))}
       </div>
     </div>
   );
+};
+
+export default ProductGrid;
