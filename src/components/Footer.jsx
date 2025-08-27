@@ -1,9 +1,9 @@
 const Footer = () => {
   return (
     <footer style={{ backgroundColor: "lightcoral" }}>
-      <p>Sitio desarrollado por <a href="https://www.linkedin.com/in/gabriel-alberini/" target="_blank">Gabriel Alberini</a></p>
+      <p>Sitio desarrollado por <a href="https://github.com/LautaroMoya25/Proyecto-Final-frontend" target="_blank">Moya Lautaro</a></p>
     </footer>
   )
 }
 
-export { Footer }
+export default Footer;

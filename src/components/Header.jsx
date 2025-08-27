@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { useAuth } from "../context/UserContext"
+import { useAuth } from "../hooks/useUser";
 
 const Header = () => {
   const { user, logout } = useAuth()
@@ -33,4 +33,4 @@ const Header = () => {
   )
 }
 
-export { Header }
+export default Header 

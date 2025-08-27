@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { Layout } from "../components/Layout"
-import { useAuth } from "../context/UserContext"
+import  Layout  from "../components/Layout"
+import { useAuth } from "../hooks/useUser";
 
 const Home = () => {
   const [products, setProducts] = useState([])
@@ -174,4 +174,4 @@ const Home = () => {
   )
 }
 
-export { Home }
+export default Home 

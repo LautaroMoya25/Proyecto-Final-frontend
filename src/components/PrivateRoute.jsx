@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom"
-import { useAuth } from "../context/UserContext"
+import { useAuth } from "../hooks/useUser";
 
 const PrivateRoute = ({ children }) => {
 
@@ -12,4 +12,4 @@ const PrivateRoute = ({ children }) => {
   return children
 }
 
-export { PrivateRoute }
+export default PrivateRoute 

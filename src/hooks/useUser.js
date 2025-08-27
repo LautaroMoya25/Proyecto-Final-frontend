@@ -8,5 +8,9 @@ const useUser = () => {
   }
   return context;
 };
+export const useAuth = () => {
+  return useContext(UserContext);
+};
+
 
 export default useUser;

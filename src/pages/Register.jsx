@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Layout } from "../components/Layout"
+import  Layout  from "../components/Layout"
 
 const Register = () => {
   const [username, setUsername] = useState("")
@@ -77,4 +77,4 @@ const Register = () => {
   )
 }
 
-export { Register }
+export default Register 

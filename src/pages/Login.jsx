@@ -1,7 +1,7 @@
 
 import { useState } from "react"
-import { Layout } from "../components/Layout"
-import { useAuth } from "../context/UserContext"
+import  Layout  from "../components/Layout"
+import { useAuth } from "../hooks/useUser";
 import { useNavigate } from "react-router-dom"
 
 const Login = () => {
@@ -52,4 +52,4 @@ const Login = () => {
   )
 }
 
-export { Login }
+export default Login
